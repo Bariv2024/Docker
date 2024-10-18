@@ -1,0 +1,35 @@
+FROM ubuntu:latest
+
+RUN apt-get -y update
+RUN apt-get -y install nginx
+
+RUN groupadd -g 1234 nginx 
+RUN useradd -m -u 1234 -g nginx nginx
+
+RUN sed -i 's/listen 80/listen 8080/g' /etc/nginx/sites-available/default
+
+RUN sed -i 's/user www-data;/user nginx;/g' /etc/nginx/nginx.conf
+
+RUN echo 'Hello Alex from Ivan' > /var/www/html/index.html
+    
+RUN rm /var/www/html/index.nginx-debian.html
+    
+RUN chown -R nginx:nginx /var/log/nginx
+RUN chown -R nginx:nginx /usr/share/nginx/html
+RUN chown -R nginx:nginx /var/www
+RUN mkdir -p /var/lib/nginx/body
+RUN mkdir -p /var/lib/nginx/proxy
+RUN mkdir -p /var/lib/nginx/fastcgi
+RUN mkdir -p /var/lib/nginx/uwsgi
+RUN mkdir -p /var/lib/nginx/scgi
+RUN mkdir -p /run
+RUN touch /run/nginx.pid
+RUN chown -R nginx:nginx /run/nginx.pid
+RUN chown -R nginx:nginx /var/lib/nginx
+RUN chown -R nginx:nginx /etc/nginx/
+
+USER nginx 
+
+CMD ["nginx", "-g", "daemon off;"]
+
+EXPOSE 8080

@@ -1,0 +1,1 @@
+You are connected to database "postgres" as user "postgres" on host "postgres_container" (address "172.19.0.3") at port "5432".

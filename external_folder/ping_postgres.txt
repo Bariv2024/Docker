@@ -1,0 +1,10 @@
+PING postgres_container (172.19.0.3) 56(84) bytes of data.
+64 bytes from postgres_container.docker_default (172.19.0.3): icmp_seq=1 ttl=64 time=0.067 ms
+64 bytes from postgres_container.docker_default (172.19.0.3): icmp_seq=2 ttl=64 time=0.050 ms
+64 bytes from postgres_container.docker_default (172.19.0.3): icmp_seq=3 ttl=64 time=0.039 ms
+64 bytes from postgres_container.docker_default (172.19.0.3): icmp_seq=4 ttl=64 time=0.045 ms
+
+--- postgres_container ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3116ms
+rtt min/avg/max/mdev = 0.039/0.050/0.067/0.010 ms
+Ping to postgres_container succeeded

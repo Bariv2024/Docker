@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - "80:80"
+    restart: always
+
+  db:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data/pgdata
+
+  ubuntu:
+    image: ubuntu:latest
+    container_name: ubuntu_service
+    volumes:
+      - ./external_folder:/mnt/external_folder
+      - ./bash.sh:/script.sh
+    command: /bin/bash -c "apt-get update && apt-get install -y curl iputils-ping postgresql-client && /bin/bash ./script.sh"
+    stdin_open: true
+    tty: true
+
+volumes:
+  pgdata:
+    driver: local
+  external_folder:
+    driver: local
+
+    
+
